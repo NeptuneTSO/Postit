@@ -1,0 +1,58 @@
+on:
+ push:
+  branches:
+    - main
+name: 🚀 Deploy website on push
+jobs:
+  web-deploy:
+    name: 🎉 Deploy
+    runs-on: ubuntu-latest
+    steps:
+    - name: 🚚 Get latest code
+      uses: actions/checkout@v6
+
+    - name: Use Node.js 22
+      uses: actions/setup-node@v6
+      with:
+        node-version: '22'
+      
+    - name: 🔨 Build Project
+      run: |
+        npm install
+        npm run build
+    
+    - name: 📂 Sync files
+      uses: SamKirkland/FTP-Deploy-Action@v4.3.6
+      with:
+        server: ftp.samkirkland.com
+        username: myFtpUserName
+        password: ${{ secrets.password }}
+
+
+# jobs in github actions are the tasks that are executed
+# jobs:
+#   deploy:
+#     runs-on: ubuntu-latest
+#     steps:
+#       - name: Deploy to infinityfree
+#         run: |
+#           echo "Deploying to infinityfree..."
+#           # Add your deployment commands here
+# runners are the machines that run the jobs
+# events are the triggers that start the workflow
+# workflow is the entire automation process
+# steps are the individual actions that are executed. example: install node, npm install, clone repository, etc. They are executed in the same runner environment. So they share the same environment variables and file system. 
+# to run a terminal command, we use run, to use a special command someone has created, we use use
+# so the order of git workflow is: workflows->events->jobs(run on runners)->runners(contain)->steps
+
+# steps to start a react app
+# install node
+# npm install
+# clone the repository
+# npm run build
+# npm start
+# deploy to infinityfree
+
+# now let's create a workflow that deploys our project to infinityfree hosting
+
+
