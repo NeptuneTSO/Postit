@@ -24,9 +24,15 @@ jobs:
     - name: 📂 Sync files
       uses: SamKirkland/FTP-Deploy-Action@v4.3.6
       with:
-        server: ftp.samkirkland.com
-        username: myFtpUserName
-        password: ${{ secrets.password }}
+        server: ftpupload.net
+        username: if0_41420998
+        password: 0JETfXbhJL
+        server-dir: ./htdocs/
+        local-dir: ./dist/
+        dangerous-clean-slate: true
+        # 0JETfXbhJL
+        # if0_41420826
+        # Us66VPlNiY
 
 
 # jobs in github actions are the tasks that are executed
